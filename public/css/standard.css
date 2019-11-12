@@ -1,0 +1,17 @@
+.links {
+    float: left;
+    width: 100%;
+}
+
+.links nav {
+    background: orange !important;
+    text-align: center;
+}
+
+.links nav .pagination li .active {
+    background: chocolate !important;
+}
+
+.corDeFundo{
+    background: #f87474;
+}
