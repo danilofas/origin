@@ -8,6 +8,6 @@ class HomeController extends Controller
 {
     public function welcome()
     {
-        return view('admin.cursos.welcome');
+        return view('welcome');
     }
 }

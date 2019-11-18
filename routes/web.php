@@ -18,13 +18,24 @@ Route::get('/', function () {
 Route::get('/index', ['as'=>'index', 'uses'=>'HomeController@welcome']);
 
 Route::get('/como-entrar-em-contato', ['as' => 'contato', 'uses' => 'ContatoController@welcome']);
-Route::get('/admin/cursos', ['as' => 'cursos.home', 'uses' => 'CursosController@welcome']);
-Route::get('/admin/cursos/adicionar', ['as' => 'cursos.add', 'uses' => 'CursosController@adicionar']);
-Route::post('/admin/cursos/salvar', ['as' => 'cursos.save', 'uses' => 'CursosController@salvar']);
-Route::get('/admin/cursos/pesquisar', ['as' => 'cursos.search', 'uses' => 'CursosController@pesquisar']);
-Route::get('/admin/cursos/acao-pesquisa-nome', ['as' => 'cursos.actionSearchName', 'uses' => 'CursosController@acaoPesquisaNome']);
-Route::get('/admin/cursos/acao-pesquisa-codigo', ['as' => 'cursos.actionSearchCode', 'uses' => 'CursosController@acaoPesquisaCodigo']);
-Route::get('/admin/cursos/acao-lista-editar/{id}', ['as' => 'cursos.actionListEdit', 'uses' => 'CursosController@acaoListaEditar']);
-Route::post('/admin/cursos/atualizar/{id}', ['as' => 'cursos.atualizar', 'uses' => 'CursosController@atualizar']);
-Route::get('/admin/cursos/apagar/{id}', ['as' => 'cursos.apagar', 'uses' => 'CursosController@apagar']);
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/admin/cursos/adicionar', ['as' => 'cursos.add', 'uses' => 'CursosController@adicionar']);
+    Route::get('/admin/cursos', ['as' => 'cursos.home', 'uses' => 'CursosController@adicionar']);
+    Route::post('/admin/cursos/salvar', ['as' => 'cursos.save', 'uses' => 'CursosController@salvar']);
+    Route::get('/admin/cursos/pesquisar', ['as' => 'cursos.search', 'uses' => 'CursosController@pesquisar']);
+    Route::get('/admin/cursos/acao-pesquisa-nome', ['as' => 'cursos.actionSearchName', 'uses' => 'CursosController@acaoPesquisaNome']);
+    Route::get('/admin/cursos/acao-pesquisa-codigo', ['as' => 'cursos.actionSearchCode', 'uses' => 'CursosController@acaoPesquisaCodigo']);
+    Route::get('/admin/cursos/acao-lista-editar/{id}', ['as' => 'cursos.actionListEdit', 'uses' => 'CursosController@acaoListaEditar']);
+    Route::post('/admin/cursos/atualizar/{id}', ['as' => 'cursos.atualizar', 'uses' => 'CursosController@atualizar']);
+    Route::get('/admin/cursos/apagar/{id}', ['as' => 'cursos.apagar', 'uses' => 'CursosController@apagar']);
+});
+
+
+
+Route::get('/login/entrar', ['as' => 'index.login', 'uses' => 'Admin\LoginController@index']);
+Route::post('/login/entrar', ['as' => 'login.logar', 'uses' => 'Admin\LoginController@logar']);
+Route::get('/login/sair', ['as' => 'login.sair', 'uses' => 'Admin\LoginController@sair']);
+
+
 
