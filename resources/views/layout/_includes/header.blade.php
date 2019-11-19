@@ -16,13 +16,21 @@
         <nav>
             <div class="nav-wrapper blue darken-4">
                 <a href="{{route('index')}}" class="brand-logo">Senac</a>
+
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul class="right hide-on-med-and-down">
-                <li><a class="modal-trigger" href="#modalCadastros">Cadastros</a></li>
-                <li><a href="badges.html">Relatórios</a></li>
-                <li><a href="collapsible.html">Usuários</a></li>
-                <li><a href="#modalBuscas" class="modal-trigger">Buscas</a></li>
-                <li><a href="mobile.html">Mobile</a></li>
+                    @if(Auth::guest())
+                        <li><a href="{{route('index.login')}}">Login</a></li>
+                    @else
+                        <li><a class="modal-trigger" href="#modalCadastros">Cadastros</a></li>
+                        <li><a href="badges.html">Relatórios</a></li>
+                        <li><a href="collapsible.html">Usuários</a></li>
+                        <li><a href="#modalBuscas" class="modal-trigger">Buscas</a></li>
+                        <li><a href="mobile.html">Mobile</a></li>
+                        <li><a href="#">{{ Auth::user()->name}}</a></li>
+                        <li><a href="{{route('login.sair')}}">Sair</a></li>
+                    @endif
+
                 </ul>
                 <!-- Modal Structure Cadastros-->
                 <div id="modalCadastros" class="modal">
@@ -57,10 +65,15 @@
             </nav>
 
             <ul class="sidenav" id="mobile-demo">
-                <li><a href="sass.html">Sass</a></li>
-                <li><a href="badges.html">Components</a></li>
-                <li><a href="collapsible.html">Javascript</a></li>
-                <li><a href="mobile.html">Mobile</a></li>
+                @if(Auth::guest())
+                        <li><a href="{{route('index.login')}}">Login</a></li>
+                @else
+                <li><a href="{{route('login.sair')}}">Sair</a></li>
+                @endif
             </ul>
 
         </header>
+
+        <div class="container">
+
+
